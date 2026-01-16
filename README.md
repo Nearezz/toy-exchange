@@ -1,3 +1,11 @@
-# toy-exchange
+# Toy Trading Exchange (Python)
+A simple toy limit-order exchange in python. 
 
-The goal is to create a simple trading exchange 
+Currently this project plans to implement: 
+- Limit Orders (BUY/SELL)
+- an order book (bids/asks)
+- a basic matching engine (price time priority at top-of-book)
+- trade generation for crossed orders
+- best bid / best ask output 
+
+Right now the goal is to have a minimal working exchange with plans to add partial fills and other features, as this project develops. 
