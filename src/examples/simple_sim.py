@@ -2,6 +2,7 @@ from exchange.book import OrderBook
 from exchange.matcher import MatchingEngine
 from exchange.models import Order
 from exchange.models import Trade
+from exchange.id_gen import next_id
 import time
 
 
@@ -20,25 +21,34 @@ def show_book(book: OrderBook, engine: MatchingEngine):
     print("Last Trade:", engine.last_trade())
 
     print("Remaining levels:", {
-        "bids": book._bids,
-        "asks": book._asks
+        "bids": book.get_bids(),
+        "asks": book.get_asks()
     })
 
-
+def add_order():
+    engine,book = make_engine()
+    order_A = Order(order_id=next_id(),side='BUY',price=100,qty=10,timestamp=int(time.time()))
+    
+    trade_A = engine.submit_order(order=order_A)
+    show_book(book=book,engine=engine)
+    
+    
 def exact_match():
     engine,book = make_engine()
     
-    order_A = Order(order_id=1,side='BUY',price=100,qty=10,timestamp=int(time.time()))
+    order_A = Order(order_id=next_id(),side='BUY',price=100,qty=10,timestamp=int(time.time()))
     trade_A = engine.submit_order(order_A)
     show_book(book=book,engine=engine)
     
     print("Waiting for order to get filled....")
     time.sleep(2)
     
-    order_B = Order(order_id=2,side='SELL',price=100,qty=10,timestamp=int(time.time()))
+    order_B = Order(order_id=next_id(),side='SELL',price=100,qty=10,timestamp=int(time.time()))
     trade_B = engine.submit_order(order_B)
     show_book(book=book,engine=engine)
     
 exact_match()
-    
+time.sleep(2)
+print('adding order...')
+add_order()
     

@@ -18,6 +18,37 @@ class OrderBook:
                 self._asks[order.price].append(order)
             except KeyError: 
                 self._asks[order.price] = deque([order]) # price -> dequeue of orders
+    
+    def get_bids(self):
+        return {
+            price: [
+                {
+                    'order_id' : o.order_id,
+                    'side': o.side,
+                    'price': o.price,
+                    'qty': o.qty, 
+                    'timestamp': o.timestamp
+                }
+                for o in level
+            ]
+            for price, level in self._bids.items()
+        }
+    
+    def get_asks(self):
+        return {
+            price: [
+                {
+                    'order_id': o.order_id,
+                    'side': o.side,
+                    'price': o.price, 
+                    'qty': o.qty,
+                    'timestamp': o.timestamp 
+                    
+                }
+                for o in level
+            ]
+            for price,level in self._asks
+        } 
                 
     def best_bid(self) -> tuple[int,int] | None: 
         prices = self._bids.keys()
