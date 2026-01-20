@@ -1,6 +1,4 @@
-from itertools import count
+from random import randint
 
-_counter = count(1)
-
-def next_id() -> int:
-    return next(_counter)
+def create_id() -> int: 
+    return randint(1,10**9)
