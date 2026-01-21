@@ -1,4 +1,4 @@
-# Toy Trading Exchange (Python)
+# Trading Exchange Sandbox (Python)
 A simple limit-order exchange in python. 
 
 Currently this project implemented: 
